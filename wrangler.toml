@@ -1,0 +1,5 @@
+name = "hono-app"
+compatibility_date = "2023-12-01"
+
+[vars]
+DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiM2EyNTQ2ODUtM2M5OS00MDdlLWJmZDgtYTQzY2ZjMWU5M2Q0IiwidGVuYW50X2lkIjoiYmE4OTNkYzA3MTIyNTlmMjI4YjRjZmNkMDkyMTg0YzIwMWQ1N2M5YmRmYzc3NDVmNTRkOTcwZmZkOGZjMDEyMSIsImludGVybmFsX3NlY3JldCI6ImZiZmI4NWIwLTUzZjUtNDg3NC05NTE0LTJjMWQxYmRhN2Q0MiJ9.z_9ry6npG1x5FQgtpavaACRcznkL1eHkLvYdfqb-2wc"
