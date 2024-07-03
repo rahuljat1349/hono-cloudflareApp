@@ -22,7 +22,7 @@ userRouter.post("/signup", async (c) => {
   if (!success) {
     c.status(411);
     return c.json({
-      massage: "validation error",
+      massage: "Inputs are not correct",
     });
   }
 
@@ -53,7 +53,7 @@ userRouter.post("/signin", async (c) => {
    if (!success) {
      c.status(411);
      return c.json({
-       massage: "validation error",
+       massage: "Inputs are not correct",
      });
    }
   try {

@@ -30,7 +30,7 @@ blogRouter.post("/", async (c) => {
   if (!success) {
     c.status(411);
     return c.json({
-      massage: "validation error",
+      massage: "Inputs are not correct",
     });
   }
   const userId = c.get("userId");
@@ -63,7 +63,7 @@ blogRouter.put("/", async (c) => {
   if (!success) {
     c.status(411);
     return c.json({
-      massage: "validation error",
+      massage: "Inputs are not correct",
     });
   }
  try {
