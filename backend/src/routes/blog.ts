@@ -34,6 +34,8 @@ blogRouter.post("/", async (c) => {
     });
   }
   const userId = c.get("userId");
+  console.log(userId);
+  
 
  try {
    const blog = await prisma.post.create({
@@ -42,6 +44,13 @@ blogRouter.post("/", async (c) => {
        content: body.content,
        authorId: userId,
      },
+     select:{
+      author:{
+          select:{
+            name:true
+          }
+      }
+     }
    });
 
    return c.json({ blog });

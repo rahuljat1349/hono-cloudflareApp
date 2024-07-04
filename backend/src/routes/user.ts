@@ -16,23 +16,26 @@ userRouter.post("/signup", async (c) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
-
+  
+  
   const { success } = signupInput.safeParse(body);
-
+  
   if (!success) {
     c.status(411);
     return c.json({
       massage: "Inputs are not correct",
     });
   }
-
+  
   try {
     const user = await prisma.user.create({
       data: {
+        name:body.name,
         email: body.email,
         password: body.password,
       },
     });
+    console.log(body);
     const jwt = await sign({ id: user.id }, "secret");
     return c.json({ jwt });
   } catch (error) {
