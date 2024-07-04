@@ -1,10 +1,13 @@
 import Quote from "../components/Quote";
 import { SignupInput } from "@rahuljat1349/common-schema";
 import { useState, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 function Signup() {
+  const navigate = useNavigate();
   const [inputValues, setInputValues] = useState<SignupInput>({
     name: "",
     email: "",
@@ -18,6 +21,15 @@ function Signup() {
       [e.target.name]: e.target.value,
     });
     console.log(inputValues);
+  };
+
+  const sendRequest = async (e: any) => {
+    e.preventDefault();
+    const res = await axios.post(`${BACKEND_URL}user/signup`, inputValues);
+    if (res.status == 200) {
+      localStorage.setItem("token", res.data.jwt);
+      navigate("/blogs");
+    }
   };
   return (
     <>
@@ -60,7 +72,10 @@ function Signup() {
                 type="password"
                 onchange={inputChangeHandler}
               />
-              <button className="p-2 font-semibold text-white bg-black rounded-md">
+              <button
+                onClick={sendRequest}
+                className="p-2 font-semibold text-white bg-black rounded-md"
+              >
                 Sign Up
               </button>
             </form>

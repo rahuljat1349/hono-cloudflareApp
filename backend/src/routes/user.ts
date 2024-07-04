@@ -48,16 +48,16 @@ userRouter.post("/signin", async (c) => {
 
   const body = await c.req.json();
 
-   const { success } = signinInput.safeParse(body);
+  const { success } = signinInput.safeParse(body);
 
-   if (!success) {
-     c.status(411);
-     return c.json({
-       massage: "Inputs are not correct",
-     });
-   }
+  if (!success) {
+    c.status(411);
+    return c.json({
+      massage: "Inputs are not correct",
+    });
+  }
   try {
-    const user = await prisma.user.findUnique({
+    const user: any = await prisma.user.findUnique({
       where: {
         email: body.email,
       },
@@ -66,6 +66,11 @@ userRouter.post("/signin", async (c) => {
     if (!user) {
       c.status(403);
       return c.json({ error: "user not found!" });
+    }
+
+    if (user.password != body.password) {
+      c.status(403);
+      return c.json({ error: "wrong credentials!" });
     }
 
     const jwt = await sign({ id: user.id }, "secret");

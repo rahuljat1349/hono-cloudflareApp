@@ -91,7 +91,18 @@ blogRouter.get("/all", async (c) => {
   }).$extends(withAccelerate());
 
   try {
-    const blogs = await prisma.post.findMany({});
+    const blogs = await prisma.post.findMany({
+      select:{
+        id: true,
+        title:true,
+        content:true,
+        author:{
+          select:{
+            name:true
+          }
+        }
+      }
+    });
 
     return c.json({ blogs });
   } catch (error) {
