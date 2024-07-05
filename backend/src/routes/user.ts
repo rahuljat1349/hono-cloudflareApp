@@ -35,7 +35,7 @@ userRouter.post("/signup", async (c) => {
         password: body.password,
       },
     });
-    console.log(body);
+  
     const jwt = await sign({ id: user.id }, "secret");
     return c.json({ jwt });
   } catch (error) {

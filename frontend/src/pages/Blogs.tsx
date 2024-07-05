@@ -1,22 +1,28 @@
 import AppBar from "../components/AppBar";
 import BlogCard from "../components/BlogCard";
+import { useBlogs } from "../hooks/useBlog";
 
 const Blogs = () => {
+  const { blogs, loading } = useBlogs();
   return (
     <>
-    <AppBar/>
-      <div className="flex flex-col  items-center">
-        <div className="max-w-3xl">
-
-        <BlogCard
-          authorName="Rahul dudi"
-          title="How an ugly single page looks like.."
-          content="this is my first blog"
-          publishedDate="2 feb 2024"
-          />
-       
-        
+      <AppBar />
+      <div className="flex flex-col items-center">
+        {loading ? (
+          "loading..."
+        ) : (
+          <div>
+            {blogs?.map((blog) => (
+              <BlogCard
+                key={blog.id}
+                authorName={`${blog.author.name || "Anonymous"}`}
+                title={blog.title}
+                content={blog.content}
+                publishedDate={blog.published}
+              />
+            ))}
           </div>
+        )}
       </div>
     </>
   );

@@ -34,24 +34,25 @@ blogRouter.post("/", async (c) => {
     });
   }
   const userId = c.get("userId");
-  console.log(userId);
   
+  const date = new Date
 
  try {
-   const blog = await prisma.post.create({
-     data: {
-       title: body.title,
-       content: body.content,
-       authorId: userId,
-     },
-     select:{
-      author:{
-          select:{
-            name:true
-          }
-      }
-     }
-   });
+     const blog = await prisma.post.create({
+       data: {
+         title: body.title,
+         content: body.content,
+         authorId: userId,
+         date: date.toLocaleDateString(),
+       },
+       select: {
+         author: {
+           select: {
+             name: true,
+           },
+         },
+       },
+     });
 
    return c.json({ blog });
  } catch (error) {
@@ -75,6 +76,8 @@ blogRouter.put("/", async (c) => {
       massage: "Inputs are not correct",
     });
   }
+  const userId = c.get("userId");
+
  try {
    const blog = await prisma.post.update({
      where: {
@@ -83,6 +86,7 @@ blogRouter.put("/", async (c) => {
      data: {
        title: body.title,
        content: body.content,
+       authorId: userId,
      },
    });
 
@@ -99,12 +103,16 @@ blogRouter.get("/all", async (c) => {
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
 
+  
+  
+
   try {
     const blogs = await prisma.post.findMany({
       select:{
         id: true,
         title:true,
         content:true,
+        date:true,
         author:{
           select:{
             name:true
