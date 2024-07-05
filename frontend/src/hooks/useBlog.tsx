@@ -7,7 +7,7 @@ type Blogs = [
     id: string;
     title: string;
     content: string;
-    published:string
+    date:string
     author: {
       name: string;
     };

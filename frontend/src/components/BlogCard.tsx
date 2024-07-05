@@ -22,7 +22,7 @@ const BlogCard = ({
             </div>
             <div className="font-semibold text-gray-700">{authorName}</div>
             &#x2022;
-            <div className=" text-sm text-gray-400    ">{publishedDate}</div>
+            <div className=" text-sm text-gray-400">{publishedDate}</div>
           </div>
           {/*  */}
           <div className="flex flex-col gap-[1px]">
